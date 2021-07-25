@@ -14,6 +14,12 @@ let width={
     w3:5,
 }
 
+let erase_width={
+    ew1:7,
+    ew2:12,
+    ew3:18,
+}
+
 let pen_colour=document.querySelectorAll(".colors div");
 let selected_colour="black";
 
@@ -34,13 +40,29 @@ let selected_width=1;
 
 for(let i=0;i<pen_width.length;i++){
     pen_width[i].addEventListener("click",function(e){
-        for(let i=0;i<pen_colour.length;i++){
-            pen_colour[i].classList.remove("width-selected");
+        for(let i=0;i<pen_width.length;i++){
+            pen_width[i].classList.remove("width-selected");
         }
 
         e.currentTarget.classList.add("width-selected");
         let curr_width=e.currentTarget.classList[0];
         selected_width=width[curr_width];
+        
+    })
+}
+
+let eraser_width=document.querySelectorAll(".eraser-width div");
+
+for(let i=0;i<eraser_width.length;i++){
+    eraser_width[i].addEventListener("click",function(e){
+        for(let i=0;i<eraser_width.length;i++){
+            eraser_width[i].classList.remove("eraser-selected");
+        }
+
+        e.currentTarget.classList.add("eraser-selected");
+        let curr_width=e.currentTarget.classList[0];
+        selected_width=erase_width[curr_width];
+        selected_colour="white";
     })
 }
 

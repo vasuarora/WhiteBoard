@@ -68,7 +68,6 @@ body{
     height:50%;
     width:9%;
     margin-left: 3rem;
-    background-color:white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -264,6 +263,7 @@ body{
     justify-content: space-evenly;
     align-items: center;
     background-color: #f7f1e3;
+    cursor:pointer;
 }
 
 .eraser-pen{
@@ -287,8 +287,22 @@ body{
     border:2px solid black;
 }
 
+.marker-width div:hover{
+    background-color: #95a5a6;
+    transition: 0.5s;
+}
+
 .width-selected{
-    color: #576574;
+    background-color: #95a5a6;
+}
+
+.eraser-width div:hover{
+    background-color: #95a5a6;
+    transition: 0.5s;
+}
+
+.eraser-selected{
+    background-color: #95a5a6;
 }
 
 canvas{
