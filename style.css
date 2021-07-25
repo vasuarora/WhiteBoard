@@ -32,36 +32,35 @@ body{
 
 .colors{
     width:100%;
-    height:95%;
+    height:100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.col1,.col2,.col3,.col4,.col5{
-    height: 87%;
+.black,.red,.yellow,.green,.blue{
+    height: 82%;
     width:15%;
-    border: 1px solid;
     border-radius: 5px;
 }
 
-.col1{
-    background-color: white;
+.black{
+    background-color: black;
 }
 
-.col2{
+.red{
     background-color: #ff3f34;
 }
 
-.col3{
+.yellow{
     background-color: #fbc531;
 }
 
-.col4{
+.green{
     background-color: #00b894;
 }
 
-.col5{
+.blue{
     background-color: #0984e3;
 }
 
@@ -78,7 +77,7 @@ body{
 
 .marker-width{
     width:100%;
-    height:95%;
+    height:100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -98,7 +97,7 @@ body{
 
 .eraser-width{
     width:100%;
-    height:95%;
+    height:100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -172,7 +171,7 @@ body{
 
 .zoom{
     width:100%;
-    height:95%;
+    height:100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -207,7 +206,7 @@ body{
 
 .undo-redo{
     width:100%;
-    height:95%;
+    height:100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -225,9 +224,40 @@ body{
     border-right: 1px solid;
 }
 
+.shapes-section{
+    height:50%;
+    width:12%;
+    margin-left: 3rem;
+    background-color:white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f7f1e3;
+}
+
+.shapes{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.shapes div{
+    height:95%;
+    width:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.line,.rectangle,.circle{
+    border-right: 1px solid;
+}
+
 .eraser-pen-section{
     height:50%;
-    width:6%;
+    width:3%;
     margin-left: 3rem;
     background-color:white;
     display: flex;
@@ -238,13 +268,13 @@ body{
 
 .eraser-pen{
     width:100%;
-    height:95%;
+    height:100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.eraser,.pen{
+.eraser{
     height:95%;
     width:50%;
     display: flex;
@@ -252,10 +282,15 @@ body{
     align-items: center;
 }
 
-.pen{
-    border-right: 1px solid;
+.colour-selected{
+    transform: scale(1.03);
+    border:2px solid black;
 }
 
-i{
-    font-size: 1.7rem!important;
+.width-selected{
+    color: #576574;
+}
+
+canvas{
+    cursor: crosshair;
 }
