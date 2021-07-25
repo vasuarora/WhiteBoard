@@ -47,7 +47,6 @@ for(let i=0;i<pen_width.length;i++){
         e.currentTarget.classList.add("width-selected");
         let curr_width=e.currentTarget.classList[0];
         selected_width=width[curr_width];
-        
     })
 }
 
