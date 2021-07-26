@@ -23,7 +23,8 @@ let erase_width={
 }
 
 let pen_colour=document.querySelectorAll(".colors div");
-let selected_colour="black";
+let selected_colour=colour_codes["black"];
+let prev_colour;
 
 for(let i=0;i<pen_colour.length;i++){
     pen_colour[i].addEventListener("click",function(e){
@@ -46,9 +47,14 @@ for(let i=0;i<pen_width.length;i++){
             pen_width[i].classList.remove("width-selected");
         }
 
+        for(let i=0;i<eraser_width.length;i++){
+            eraser_width[i].classList.remove("eraser-selected");
+        }
+
         e.currentTarget.classList.add("width-selected");
         let curr_width=e.currentTarget.classList[0];
         selected_width=width[curr_width];
+        selected_colour=prev_colour;
     })
 }
 
@@ -60,9 +66,13 @@ for(let i=0;i<eraser_width.length;i++){
             eraser_width[i].classList.remove("eraser-selected");
         }
 
+        for(let i=0;i<pen_width.length;i++){
+            pen_width[i].classList.remove("width-selected");
+        }
         e.currentTarget.classList.add("eraser-selected");
         let curr_width=e.currentTarget.classList[0];
         selected_width=erase_width[curr_width];
+        prev_colour=selected_colour;
         selected_colour="white";
     })
 }
@@ -74,9 +84,11 @@ canvas.height=window.innerHeight;
 
 let tool=canvas.getContext("2d");
 
+tool_rect= tool.canvas.getBoundingClientRect();
+
 window.addEventListener("mousedown",function(e){
     tool.beginPath();
-    tool.moveTo(e.clientX,e.clientY);
+    tool.moveTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);
     isDrawing=true;
 })
 
@@ -86,7 +98,7 @@ window.addEventListener("mouseup",function(e){
 
 window.addEventListener("mousemove",function(e){
     if(isDrawing){
-        tool.lineTo(e.clientX,e.clientY);
+        tool.lineTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);
         tool.strokeStyle=selected_colour;
         tool.lineWidth=selected_width;
         tool.stroke();

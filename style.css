@@ -186,7 +186,7 @@ body{
 }
 
 .undo-redo-section{
-    height:40%;
+    height:42%;
     width:6%;
     margin-left: 3rem;
     display: flex;
@@ -234,7 +234,7 @@ body{
 }
 
 .shapes-section{
-    height:40%;
+    height:42%;
     width:12%;
     margin-left: 3rem;
     display: flex;
@@ -275,7 +275,7 @@ body{
 }
 
 .eraser-pen-section{
-    height:40%;
+    height:42%;
     width:3%;
     margin-left: 3rem;
     display: flex;
@@ -312,7 +312,7 @@ body{
 }
 
 .download-section{
-    height:40%;
+    height:42%;
     width:3%;
     margin-left: 3rem;
     display: flex;
