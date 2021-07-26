@@ -13,7 +13,7 @@ let colour_codes={
 let width={
     w1:1,
     w2:3,
-    w3:5,
+    w3:6,
 }
 
 let erase_width={
