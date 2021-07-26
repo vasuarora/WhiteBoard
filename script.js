@@ -1,4 +1,6 @@
 let canvas=document.querySelector("canvas");
+let clear_all=document.querySelector(".eraser");
+let download=document.querySelector(".download-section");
 
 let colour_codes={
     black:'#000000',
@@ -91,9 +93,16 @@ window.addEventListener("mousemove",function(e){
     }
 })
 
-let clear_all=document.querySelector(".eraser");
-
 clear_all.addEventListener("click",function(e){
     tool.clearRect(0, 0, canvas.width, canvas.height);
     tool.beginPath();
+})
+
+download.addEventListener("click",function(e){
+    let url=canvas.toDataURL();
+    let a=document.createElement("a");
+    a.href=url;
+    a.download="WhiteBoard.png";
+    a.click();
+    a.remove();
 })

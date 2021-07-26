@@ -9,21 +9,25 @@ body{
 
 .container{
     height:100vh;
+    width: 100vw;
 }
 
 .header{
     background-color: #636e72;
-    height: 10%;
+    height: 12%;
     width: 100%;
     display: flex;
     align-items: center;
 }
 
+.material-icons{
+    font-size: 1.8rem!important;
+}
+
 .color-section{
-    height:50%;
+    height:42%;
     width:15%;
     margin-left: 2rem;
-    background-color:white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,8 +68,22 @@ body{
     background-color: #0984e3;
 }
 
+.title-colours,.title-width,.title-eraser,.title-undo,.title-redo,.title-shapes,.title-delete,.title-download{
+    position: absolute;
+    top:4.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: white;
+    cursor: default;
+}
+
+.title-colours{
+    left:calc(2rem + 7.5%);
+    transform: translateX(-50%);
+}
+
 .marker-width-section,.eraser-section{
-    height:50%;
+    height:42%;
     width:9%;
     margin-left: 3rem;
     display: flex;
@@ -80,6 +98,11 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.title-width{
+    left:calc(5rem + 19.5%);
+    transform: translateX(-50%);
 }
 
 .w1,.w2,.w3{
@@ -115,6 +138,11 @@ body{
     border-right:1px solid ;
 }
 
+.title-eraser{
+    left:calc(8rem + 28.5%);
+    transform: translateX(-50%);
+}
+
 .l1{
     height:15%;
     background-color: black;
@@ -134,37 +162,40 @@ body{
 }
 
 .c1{
-    height:42%;
-    width: 32%;
+    height:40%;
+    width: 30%;
     border-radius: 50%;
     background-color: black;
     display: inline-block;
 }
 
 .c2{
-    height:60%;
-    width: 45%;
+    height:54%;
+    width: 42%;
     border-radius: 50%;
     background-color: black;
     display: inline-block;
 }
 
 .c3{
-    height:75%;
-    width: 55%;
+    height:65%;
+    width: 50%;
     border-radius: 50%;
     background-color: black;
     display: inline-block;
 }
 
 .undo-redo-section{
-    height:50%;
+    height:40%;
     width:6%;
     margin-left: 3rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     background-color: #f7f1e3;
+    cursor:default;
+    border: none;
+    outline: none;
 }
 
 .undo-redo{
@@ -183,18 +214,34 @@ body{
     align-items: center;
 }
 
+.undo-redo div:hover{
+    background-color: #95a5a6;
+    transition: 0.5s;
+}
+
 .undo{
     border-right: 1px solid;
 }
 
+.title-undo{
+    left:calc(11rem + 34.5%);
+    transform: translateX(-50%);
+}
+
+.title-redo{
+    left:calc(11rem + 37.7%);
+    transform: translateX(-50%);
+}
+
 .shapes-section{
-    height:50%;
+    height:40%;
     width:12%;
     margin-left: 3rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     background-color: #f7f1e3;
+    cursor:default;
 }
 
 .shapes{
@@ -205,6 +252,11 @@ body{
     align-items: center;
 }
 
+.shapes div:hover{
+    background-color: #95a5a6;
+    transition: 0.5s;
+}
+
 .shapes div{
     height:95%;
     width:50%;
@@ -213,18 +265,24 @@ body{
     align-items: center;
 }
 
+.title-shapes{
+    left:calc(14rem + 45%);
+    transform: translateX(-50%);
+}
+
 .line,.rectangle,.circle{
     border-right: 1px solid;
 }
 
 .eraser-pen-section{
-    height:50%;
+    height:40%;
     width:3%;
     margin-left: 3rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     background-color: #f7f1e3;
+    cursor:default;
 }
 
 .eraser-pen{
@@ -236,6 +294,44 @@ body{
 }
 
 .eraser{
+    height:95%;
+    width:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-delete{
+    left:calc(17rem + 52.5%);
+    transform: translateX(-50%);
+}
+
+.title-download{
+    left:calc(20rem + 55.5%);
+    transform: translateX(-50%);
+}
+
+.download-section{
+    height:40%;
+    width:3%;
+    margin-left: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f1e3;
+    cursor:default;
+}
+
+.download{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor:default;
+}
+
+.download-btn{
     height:95%;
     width:50%;
     display: flex;
@@ -267,6 +363,11 @@ body{
 }
 
 .eraser-pen-section:hover{
+    background-color: #95a5a6;
+    transition: 0.5s;
+}
+
+.download:hover{
     background-color: #95a5a6;
     transition: 0.5s;
 }
