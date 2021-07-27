@@ -42,6 +42,11 @@ body{
     align-items: center;
 }
 
+.colors div:hover{
+    transform: scale(1.08);
+    transition: 0.5s;
+}
+
 .black,.red,.yellow,.green,.blue{
     height: 82%;
     width:15%;
@@ -370,6 +375,10 @@ body{
 .download:hover{
     background-color: #95a5a6;
     transition: 0.5s;
+}
+
+.rectangle-selected{
+    background-color: #95a5a6;
 }
 
 canvas{

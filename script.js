@@ -1,6 +1,10 @@
 let canvas=document.querySelector("canvas");
 let clear_all=document.querySelector(".eraser");
 let download=document.querySelector(".download-section");
+let undo_btn=document.querySelector(".undo");
+let redo_btn=document.querySelector(".redo");
+
+let rectangle_shape=document.querySelector(".rectangle");
 
 let undo=[];
 let redo=[];
@@ -80,6 +84,107 @@ for(let i=0;i<eraser_width.length;i++){
     })
 }
 
+undo_btn.addEventListener("click",function(e){
+    let redo_points=[];
+    if(undo.length>=2){
+        let idx=undo.length-1;
+        while(undo[idx].id!="md"){
+            redo_points.unshift(undo.pop());
+            idx--;
+        }
+        redo_points.unshift(undo.pop());
+    }
+
+    redo.push(redo_points);
+    tool.clearRect(0, 0, canvas.width, canvas.height);
+    redraw();
+})
+
+redo_btn.addEventListener("click",function(e){
+    if(redo.length==0){
+        return;
+    }
+
+    let redo_points=redo.pop();
+
+    for(let i=0;i<redo_points.length;i++){
+        undo.push(redo_points[i]);
+    }
+
+    tool.clearRect(0, 0, canvas.width, canvas.height);
+    redraw();
+})
+
+function redraw(){
+    for(let i=0;i<undo.length;i++){
+        let obj=undo[i];
+        tool.lineWidth=obj.width;
+        tool.strokeStyle=obj.color;
+        if(obj.id=="md"){
+            tool.beginPath();
+            tool.moveTo(obj.x,obj.y);
+        }
+
+        else{
+            tool.lineTo(obj.x,obj.y);
+            tool.stroke();
+        }
+    }
+}
+
+clear_all.addEventListener("click",function(e){
+    undo=[];
+    redo=[];
+    tool.clearRect(0, 0, canvas.width, canvas.height);
+    tool.beginPath();
+})
+
+download.addEventListener("click",function(e){
+    let url=canvas.toDataURL();
+    let a=document.createElement("a");
+    a.href=url;
+    a.download="WhiteBoard.png";
+    a.click();
+    a.remove();
+})
+
+rectangle_shape.addEventListener("click",function(e){
+    e.currentTarget.classList.add("rectangle-selected");
+    let rect = {};
+    let drag = false;
+    function init() {
+        canvas.addEventListener('mousedown', mouseDown, false);
+        canvas.addEventListener('mouseup', mouseUp, false);
+        canvas.addEventListener('mousemove', mouseMove, false);
+    }
+
+    function mouseDown(e) {
+        rect.startX = e.pageX - this.offsetLeft;
+        rect.startY = e.pageY - this.offsetTop;
+        drag = true;
+    }
+
+    function mouseUp() {
+        drag = false;
+    }
+
+    function mouseMove(e) {
+        if (drag) {
+          rect.w = (e.pageX - this.offsetLeft) - rect.startX;
+          rect.h = (e.pageY - this.offsetTop) - rect.startY ;
+          tool.clearRect(0,0,canvas.width,canvas.height);
+          draw();
+        }
+    }
+
+    function draw() {
+        tool.fillRect(rect.startX, rect.startY, rect.w, rect.h);
+        tool.fillStyle=selected_colour;
+    }
+
+    init();
+})
+
 let isDrawing=false;
 
 canvas.width=window.innerWidth;
@@ -125,72 +230,5 @@ canvas.addEventListener("mousemove",function(e){
         }
     
         undo.push(obj);
-
     }
-})
-
-let undo_btn=document.querySelector(".undo");
-
-undo_btn.addEventListener("click",function(e){
-    let redo_points=[];
-    if(undo.length>=2){
-        let idx=undo.length-1;
-        while(undo[idx].id!="md"){
-            redo_points.unshift(undo.pop());
-            idx--;
-        }
-        redo_points.unshift(undo.pop());
-    }
-
-    redo.push(redo_points);
-    tool.clearRect(0, 0, canvas.width, canvas.height);
-    redraw();
-})
-
-let redo_btn=document.querySelector(".redo");
-
-redo_btn.addEventListener("click",function(e){
-    if(redo.length==0){
-        return;
-    }
-
-    let redo_points=redo.pop();
-
-    for(let i=0;i<redo_points.length;i++){
-        undo.push(redo_points[i]);
-    }
-
-    tool.clearRect(0, 0, canvas.width, canvas.height);
-    redraw();
-})
-
-function redraw(){
-    for(let i=0;i<undo.length;i++){
-        let obj=undo[i];
-        tool.lineWidth=obj.width;
-        tool.strokeStyle=obj.color;
-        if(obj.id=="md"){
-            tool.beginPath();
-            tool.moveTo(obj.x,obj.y);
-        }
-
-        else{
-            tool.lineTo(obj.x,obj.y);
-            tool.stroke();
-        }
-    }
-}
-
-clear_all.addEventListener("click",function(e){
-    tool.clearRect(0, 0, canvas.width, canvas.height);
-    tool.beginPath();
-})
-
-download.addEventListener("click",function(e){
-    let url=canvas.toDataURL();
-    let a=document.createElement("a");
-    a.href=url;
-    a.download="WhiteBoard.png";
-    a.click();
-    a.remove();
 })
