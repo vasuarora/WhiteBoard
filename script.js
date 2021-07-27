@@ -2,6 +2,9 @@ let canvas=document.querySelector("canvas");
 let clear_all=document.querySelector(".eraser");
 let download=document.querySelector(".download-section");
 
+let undo=[];
+let redo=[];
+
 let colour_codes={
     black:'#000000',
     red:'#ff3f34',
@@ -86,24 +89,97 @@ let tool=canvas.getContext("2d");
 
 tool_rect= tool.canvas.getBoundingClientRect();
 
-window.addEventListener("mousedown",function(e){
+canvas.addEventListener("mousedown",function(e){
     tool.beginPath();
     tool.moveTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);
     isDrawing=true;
+    let obj={
+        id:"md",
+        x:e.clientX - tool_rect.left,
+        y:e.clientY - tool_rect.top,
+        color:tool.strokeStyle,
+        width:tool.lineWidth,
+    }
+
+    undo.push(obj);
 })
 
-window.addEventListener("mouseup",function(e){
+canvas.addEventListener("mouseup",function(e){
     isDrawing=false;
+    console.log(undo)
 })
 
-window.addEventListener("mousemove",function(e){
+canvas.addEventListener("mousemove",function(e){
     if(isDrawing){
         tool.lineTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);
         tool.strokeStyle=selected_colour;
         tool.lineWidth=selected_width;
         tool.stroke();
+
+        let obj={
+            id:"mm",
+            x:e.clientX - tool_rect.left,
+            y:e.clientY - tool_rect.top,
+            color:tool.strokeStyle,
+            width:tool.lineWidth,
+        }
+    
+        undo.push(obj);
+
     }
 })
+
+let undo_btn=document.querySelector(".undo");
+
+undo_btn.addEventListener("click",function(e){
+    let redo_points=[];
+    if(undo.length>=2){
+        let idx=undo.length-1;
+        while(undo[idx].id!="md"){
+            redo_points.unshift(undo.pop());
+            idx--;
+        }
+        redo_points.unshift(undo.pop());
+    }
+
+    redo.push(redo_points);
+    tool.clearRect(0, 0, canvas.width, canvas.height);
+    redraw();
+})
+
+let redo_btn=document.querySelector(".redo");
+
+redo_btn.addEventListener("click",function(e){
+    if(redo.length==0){
+        return;
+    }
+
+    let redo_points=redo.pop();
+
+    for(let i=0;i<redo_points.length;i++){
+        undo.push(redo_points[i]);
+    }
+
+    tool.clearRect(0, 0, canvas.width, canvas.height);
+    redraw();
+})
+
+function redraw(){
+    for(let i=0;i<undo.length;i++){
+        let obj=undo[i];
+        tool.lineWidth=obj.width;
+        tool.strokeStyle=obj.color;
+        if(obj.id=="md"){
+            tool.beginPath();
+            tool.moveTo(obj.x,obj.y);
+        }
+
+        else{
+            tool.lineTo(obj.x,obj.y);
+            tool.stroke();
+        }
+    }
+}
 
 clear_all.addEventListener("click",function(e){
     tool.clearRect(0, 0, canvas.width, canvas.height);
