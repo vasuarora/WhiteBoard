@@ -3,8 +3,9 @@ let clear_all=document.querySelector(".eraser");
 let download=document.querySelector(".download-section");
 let undo_btn=document.querySelector(".undo");
 let redo_btn=document.querySelector(".redo");
+let body=document.querySelector("body");
 
-let rectangle_shape=document.querySelector(".rectangle");
+let input=document.querySelector("#file");
 
 let undo=[];
 let redo=[];
@@ -115,6 +116,19 @@ redo_btn.addEventListener("click",function(e){
     redraw();
 })
 
+input.addEventListener("change",function(e){
+    console.log(e.currentTarget.files[0]);
+    let reader=new FileReader();
+    reader.onload=function(e){
+        let imgtag=document.createElement("img");
+        imgtag.classList.add("upload-img");
+        imgtag.src=e.target.result;
+        body.append(imgtag);
+    }
+
+    reader.readAsDataURL(e.currentTarget.files[0]);
+})
+
 function redraw(){
     for(let i=0;i<undo.length;i++){
         let obj=undo[i];
@@ -146,43 +160,6 @@ download.addEventListener("click",function(e){
     a.download="WhiteBoard.png";
     a.click();
     a.remove();
-})
-
-rectangle_shape.addEventListener("click",function(e){
-    e.currentTarget.classList.add("rectangle-selected");
-    let rect = {};
-    let drag = false;
-    function init() {
-        canvas.addEventListener('mousedown', mouseDown, false);
-        canvas.addEventListener('mouseup', mouseUp, false);
-        canvas.addEventListener('mousemove', mouseMove, false);
-    }
-
-    function mouseDown(e) {
-        rect.startX = e.pageX - this.offsetLeft;
-        rect.startY = e.pageY - this.offsetTop;
-        drag = true;
-    }
-
-    function mouseUp() {
-        drag = false;
-    }
-
-    function mouseMove(e) {
-        if (drag) {
-          rect.w = (e.pageX - this.offsetLeft) - rect.startX;
-          rect.h = (e.pageY - this.offsetTop) - rect.startY ;
-          tool.clearRect(0,0,canvas.width,canvas.height);
-          draw();
-        }
-    }
-
-    function draw() {
-        tool.fillRect(rect.startX, rect.startY, rect.w, rect.h);
-        tool.fillStyle=selected_colour;
-    }
-
-    init();
 })
 
 let isDrawing=false;
