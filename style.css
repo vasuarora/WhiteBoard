@@ -374,14 +374,14 @@ body{
     transition: 0.5s;
 }
 
-.upload-img{
+/* .upload-img{
     height:150px;
     width: auto;
     position: absolute;
     top:150px;
     left:50px;
-}
+} */
 
 canvas{
-    cursor:url('pen1.png') 4 50, auto;
+    cursor:url('pen.png') 4 50, auto;
 }

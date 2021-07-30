@@ -5,9 +5,9 @@ let undo_btn=document.querySelector(".undo");
 let redo_btn=document.querySelector(".redo");
 let body=document.querySelector("body");
 
-let upload_img=document.querySelector(".upload-img");
+let container=document.querySelector(".container");
 
-let eraserSelected=document.querySelector(".eraser-selected");
+let upload_img=document.querySelector(".upload-img");
 
 let input=document.querySelector("#file");
 
@@ -121,15 +121,15 @@ redo_btn.addEventListener("click",function(e){
 })
 
 input.addEventListener("change",function(e){
-    let reader=new FileReader();
-    reader.onload=function(e){
-        let imgtag=document.createElement("img");
-        imgtag.classList.add("upload-img");
-        imgtag.src=e.target.result;
-        body.append(imgtag);
+    let reader = new FileReader();
+    reader.onload = function(event){
+        let img = new Image();
+        img.onload = function(){
+            tool.drawImage(img,20,20,200,250);
+        }
+        img.src = event.target.result;
     }
-
-    reader.readAsDataURL(e.currentTarget.files[0]);
+    reader.readAsDataURL(e.target.files[0]);  
 })
 
 function redraw(){
