@@ -5,6 +5,10 @@ let undo_btn=document.querySelector(".undo");
 let redo_btn=document.querySelector(".redo");
 let body=document.querySelector("body");
 
+let upload_img=document.querySelector(".upload-img");
+
+let eraserSelected=document.querySelector(".eraser-selected");
+
 let input=document.querySelector("#file");
 
 let undo=[];
@@ -117,7 +121,6 @@ redo_btn.addEventListener("click",function(e){
 })
 
 input.addEventListener("change",function(e){
-    console.log(e.currentTarget.files[0]);
     let reader=new FileReader();
     reader.onload=function(e){
         let imgtag=document.createElement("img");
@@ -209,3 +212,4 @@ canvas.addEventListener("mousemove",function(e){
         undo.push(obj);
     }
 })
+

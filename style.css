@@ -383,5 +383,5 @@ body{
 }
 
 canvas{
-    cursor: crosshair;
+    cursor:url('pen1.png') 4 50, auto;
 }
