@@ -11,6 +11,8 @@ let upload_img=document.querySelector(".upload-img");
 
 let input=document.querySelector("#file");
 
+canvas.style.cursor = "url('pen.png') 4 50, auto";
+
 let undo=[];
 let redo=[];
 
@@ -67,6 +69,7 @@ for(let i=0;i<pen_width.length;i++){
         let curr_width=e.currentTarget.classList[0];
         selected_width=width[curr_width];
         selected_colour=prev_colour;
+        canvas.style.cursor = "url('pen.png') 4 50, auto";
     })
 }
 
@@ -86,6 +89,7 @@ for(let i=0;i<eraser_width.length;i++){
         selected_width=erase_width[curr_width];
         prev_colour=selected_colour;
         selected_colour="white";
+        canvas.style.cursor = "url('eraser.png') 4 50, auto";
     })
 }
 
