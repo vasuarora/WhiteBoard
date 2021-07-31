@@ -49,6 +49,7 @@ for(let i=0;i<pen_colour.length;i++){
         e.currentTarget.classList.add("colour-selected");
         let curr_colour=e.currentTarget.classList[0];
         selected_colour=colour_codes[curr_colour];
+        prev_colour=selected_colour;
     })
 }
 
@@ -216,4 +217,3 @@ canvas.addEventListener("mousemove",function(e){
         undo.push(obj);
     }
 })
-
