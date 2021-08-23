@@ -40,7 +40,7 @@ let pen_colour=document.querySelectorAll(".colors div");
 let selected_colour=colour_codes["black"];
 let prev_colour;
 
-for(let i=0;i<pen_colour.length;i++){
+for(let i=0;i<pen_colour.length;i++){                          //selecting the current pen colour
     pen_colour[i].addEventListener("click",function(e){
         for(let i=0;i<pen_colour.length;i++){
             pen_colour[i].classList.remove("colour-selected");
@@ -56,7 +56,7 @@ for(let i=0;i<pen_colour.length;i++){
 let pen_width=document.querySelectorAll(".marker-width div");
 let selected_width=1;
 
-for(let i=0;i<pen_width.length;i++){
+for(let i=0;i<pen_width.length;i++){                              //selecting the current pen width
     pen_width[i].addEventListener("click",function(e){
         for(let i=0;i<pen_width.length;i++){
             pen_width[i].classList.remove("width-selected");
@@ -76,7 +76,7 @@ for(let i=0;i<pen_width.length;i++){
 
 let eraser_width=document.querySelectorAll(".eraser-width div");
 
-for(let i=0;i<eraser_width.length;i++){
+for(let i=0;i<eraser_width.length;i++){                                      //selecting the current eraser width
     eraser_width[i].addEventListener("click",function(e){
         for(let i=0;i<eraser_width.length;i++){
             eraser_width[i].classList.remove("eraser-selected");
@@ -99,15 +99,15 @@ undo_btn.addEventListener("click",function(e){
     if(undo.length>=2){
         let idx=undo.length-1;
         while(undo[idx].id!="md"){
-            redo_points.unshift(undo.pop());
+            redo_points.unshift(undo.pop());                //removing mouse events from array unless mouse down occurs and storing those events in another array for redo
             idx--;
         }
-        redo_points.unshift(undo.pop());
+        redo_points.unshift(undo.pop());                   //removing mouse down event 
     }
 
     redo.push(redo_points);
-    tool.clearRect(0, 0, canvas.width, canvas.height);
-    redraw();
+    tool.clearRect(0, 0, canvas.width, canvas.height);           //clearing the canvas
+    redraw();                                                    //redrawing on the canvas
 })
 
 redo_btn.addEventListener("click",function(e){
@@ -130,7 +130,7 @@ input.addEventListener("change",function(e){
     reader.onload = function(event){
         let img = new Image();
         img.onload = function(){
-            tool.drawImage(img,20,20,200,250);
+            tool.drawImage(img,20,20,200,250);                  //drawing the input image on canvas
         }
         img.src = event.target.result;
     }
@@ -158,13 +158,13 @@ clear_all.addEventListener("click",function(e){
     undo=[];
     redo=[];
     tool.clearRect(0, 0, canvas.width, canvas.height);
-    tool.beginPath();
+    tool.beginPath();                                 //reset current path
 })
 
 download.addEventListener("click",function(e){
-    let url=canvas.toDataURL();
+    let url=canvas.toDataURL();                   
     let a=document.createElement("a");
-    a.href=url;
+    a.href=url;                                                  //download url
     a.download="WhiteBoard.png";
     a.click();
     a.remove();
@@ -177,11 +177,11 @@ canvas.height=window.innerHeight;
 
 let tool=canvas.getContext("2d");
 
-tool_rect= tool.canvas.getBoundingClientRect();
+tool_rect= tool.canvas.getBoundingClientRect();                 //to avoid scaling problems
 
 canvas.addEventListener("mousedown",function(e){
     tool.beginPath();
-    tool.moveTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);
+    tool.moveTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);            
     isDrawing=true;
     let obj={
         id:"md",
@@ -195,16 +195,16 @@ canvas.addEventListener("mousedown",function(e){
 })
 
 canvas.addEventListener("mouseup",function(e){
-    isDrawing=false;
-    console.log(undo)
+    isDrawing=false;                                //dont draw on mouseup
+    console.log(undo);
 })
 
 canvas.addEventListener("mousemove",function(e){
     if(isDrawing){
-        tool.lineTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);
+        tool.lineTo(e.clientX - tool_rect.left, e.clientY - tool_rect.top);         //drawing wherever we move the mouse
         tool.strokeStyle=selected_colour;
         tool.lineWidth=selected_width;
-        tool.stroke();
+        tool.stroke();                                      //to show the drawing on canvas
 
         let obj={
             id:"mm",
